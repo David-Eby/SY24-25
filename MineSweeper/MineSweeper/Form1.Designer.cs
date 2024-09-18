@@ -127,6 +127,7 @@
             this.flagsLabel = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.timeLabel = new System.Windows.Forms.Label();
+            this.restartButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button01
@@ -1054,11 +1055,23 @@
             this.timeLabel.TabIndex = 101;
             this.timeLabel.Text = "Time: 0";
             // 
+            // restartButton
+            // 
+            this.restartButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.restartButton.Location = new System.Drawing.Point(184, 519);
+            this.restartButton.Name = "restartButton";
+            this.restartButton.Size = new System.Drawing.Size(178, 52);
+            this.restartButton.TabIndex = 102;
+            this.restartButton.Text = "Restart";
+            this.restartButton.UseVisualStyleBackColor = true;
+            this.restartButton.Click += new System.EventHandler(this.restartButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(547, 521);
+            this.ClientSize = new System.Drawing.Size(547, 582);
+            this.Controls.Add(this.restartButton);
             this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.flagsLabel);
             this.Controls.Add(this.button91);
@@ -1274,6 +1287,7 @@
         private System.Windows.Forms.Label flagsLabel;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Label timeLabel;
+        private System.Windows.Forms.Button restartButton;
     }
 }
 
