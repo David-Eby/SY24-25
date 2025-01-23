@@ -94,65 +94,45 @@ namespace BinaryConverter {
             textBoxes.TryGetValue(1, out var tbs1);
             textBoxes.TryGetValue(2, out var tbs2);
 
-            switch (operationUpDown.Text) {
-                case "+":
-                    byte carry = 0;
-                    for (int i = 0; i < tbs1.Count; i++) {
-                        var tb0 = tbs0.ToArray()[i];
-                        var tb1 = tbs1.ToArray()[i];
-                        var tb2 = tbs2.ToArray()[i];
+            byte carry = 0;
+            for (int i = 0; i < Extentions.Min(tbs0.Count, tbs1.Count, tbs2.Count); i++) {
+                var tb0 = tbs0[i];
+                var tb1 = tbs1[i];
+                var tb2 = tbs2[i];
 
+                switch (operationUpDown.Text) {
+                    case "+":
                         byte tb1Int = byte.Parse(tb1.Text);
                         byte tb2Int = byte.Parse(tb2.Text);
 
                         byte num = (byte)((tb1Int ^ tb2Int) ^ carry);
                         tb0.Text = num.ToString();
 
-                        if ((tb1Int & tb2Int) == 1 || ((tb1Int ^ tb2Int) & carry) == 1) {
-                            carry = 1;
-                        } else {
-                            carry = 0;
-                        }
-                    }
-                    break;
-                case "&":
-                    for (int i = 0; i < tbs1.Count; i++) {
-                        var tb0 = tbs0.ToArray()[i];
-                        var tb1 = tbs1.ToArray()[i];
-                        var tb2 = tbs2.ToArray()[i];
-
+                        byte sum = (byte)(tb1Int + tb2Int + carry);
+                        if (sum > 1) carry = 1;
+                        else carry = 0;
+                        break;
+                    case "&":
                         tb0.Text = (
                             int.Parse(tb1.Text) &
                             int.Parse(tb2.Text)
                         ).ToString();
-                    }
-                    break;
-                case "|":
-                    for (int i = 0; i < tbs1.Count; i++) {
-                        var tb0 = tbs0.ToArray()[i];
-                        var tb1 = tbs1.ToArray()[i];
-                        var tb2 = tbs2.ToArray()[i];
-
+                        break;
+                    case "|":
                         tb0.Text = (
                             int.Parse(tb1.Text) |
                             int.Parse(tb2.Text)
                         ).ToString();
-                    }
-                    break;
-                case "^":
-                    for (int i = 0; i < tbs1.Count; i++) {
-                        var tb0 = tbs0.ToArray()[i];
-                        var tb1 = tbs1.ToArray()[i];
-                        var tb2 = tbs2.ToArray()[i];
-
+                        break;
+                    case "^":
                         tb0.Text = (
                             int.Parse(tb1.Text) ^
                             int.Parse(tb2.Text)
                         ).ToString();
-                    }
-                    break;
+                        break;
+                }
+                SetValue(0, label3);
             }
-            SetValue(0, label3);
         }
 
         private void clearButton_Click(object sender, EventArgs e) {
